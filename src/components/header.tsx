@@ -5,7 +5,7 @@ import {
 	Flex,
 	Spacer,
 	Box,
-	Button
+	IconButton
 } from '@chakra-ui/react'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { Logo } from './logo'
@@ -34,16 +34,17 @@ export function Header() {
 
 					<Text>Manaus, AM</Text>
 				</HStack>
-				<Button
+				<IconButton
 					bg={(theme)=>theme.colors.yellow.light}
 					color={(theme)=>theme.colors.yellow.dark}
 					ml={4}
-				>
-					<ShoppingCart
-						size={24}
-						weight="fill"
-					/>
-				</Button>
+					icon={
+						<ShoppingCart
+							size={24}
+							weight="fill"
+						/>
+					}
+				/>
 			</Flex>
 		</Container>
 	)
