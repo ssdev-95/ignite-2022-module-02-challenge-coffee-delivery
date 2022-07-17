@@ -5,11 +5,12 @@ import { Header } from '../components/header'
 export function DefaultLayout() {	
 	return (
 		<Container
-			as="main"
+			as="div"
 			bg={(theme)=>theme.colors.base.bg}
-			height="100vh"
+			minHeight="100vh"
 			maxWidth="100vw"
 			px={0}
+			scrollBehavior="smooth"
 		>
 			<Header />
 			<Outlet />
