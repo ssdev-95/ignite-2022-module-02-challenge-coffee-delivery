@@ -19,7 +19,7 @@ export function Input({ optional = false, ...props }: InputProps) {
     setValue(e.target.value)
   }
 
-  const showOptionalText = optional && !!!value
+  const showOptionalText = optional && !value
 
   return (
     <InputGroup>

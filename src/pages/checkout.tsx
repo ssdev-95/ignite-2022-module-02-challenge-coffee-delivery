@@ -40,12 +40,7 @@ export function Checkout() {
   const cart = ['82hd', '29dj']
 
   return (
-    <Container
-			as="main"
-			w={1100}
-			maxW="100vw"
-			pb={10}
-		>
+    <Container as="main" w={1100} maxW="100vw" pb={10}>
       <Flex gap={8} direction={{ base: 'column', md: 'row' }}>
         <VStack space={8}>
           <Text
@@ -153,8 +148,8 @@ export function Checkout() {
                 md: 'repeat(3, 1fr)',
               }}
               templateAreas={{
-                base: `"credit debit" "cash ."`,
-                md: `"credit debit cash"`,
+                base: '"credit debit" "cash ."',
+                md: '"credit debit cash"',
               }}
               gap={2}
             >
@@ -292,64 +287,57 @@ export function Checkout() {
                 <Divider
                   orientation="horizontal"
                   size="md"
-									mb={4}
+                  mb={4}
                   bg={theme.colors.base.button}
                 />
               </>
             ))}
 
-	          <VStack mt={4}>
-							<HStack
-								w="full"
-								alignItems="center"
-								justifyContent="space-between"
-							>
-								<Text>Subtotal</Text>
+            <VStack mt={4}>
+              <HStack
+                w="full"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text>Subtotal</Text>
 
-								<Text>$ 19.80</Text>
-							</HStack>
+                <Text>$ 19.80</Text>
+              </HStack>
 
-							<HStack
-								w="full"
-								alignItems="center"
-								justifyContent="space-between"
-							>
-								<Text>Deliver fees</Text>
+              <HStack
+                w="full"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text>Deliver fees</Text>
 
-								<Text>$ 3.95</Text>
-							</HStack>
+                <Text>$ 3.95</Text>
+              </HStack>
 
-							<HStack
-								w="full"
-								alignItems="center"
-								justifyContent="space-between"
-							>
-									<Text
-										as="strong"
-										fontSize={24}
-									>
-										Order total
-									</Text>
-	
+              <HStack
+                w="full"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text as="strong" fontSize={24}>
+                  Order total
+                </Text>
 
-									<Text
-										as="strong"
-										fontSize={24}
-									>
-										$ 23.75
-									</Text>
-							</HStack>
+                <Text as="strong" fontSize={24}>
+                  $ 23.75
+                </Text>
+              </HStack>
 
-							<Button
-								bg={theme.colors.yellow.medium}
-								color={theme.colors.white}
-								w="full"
-								h={12}
-							>
-								Confirm order
-							</Button>
-						</VStack>
-					</Container>
+              <Button
+                bg={theme.colors.yellow.medium}
+                color={theme.colors.white}
+                w="full"
+                h={12}
+              >
+                Confirm order
+              </Button>
+            </VStack>
+          </Container>
         </VStack>
       </Flex>
     </Container>
