@@ -14,7 +14,7 @@ import CoffeCup from '../assets/img/coffee-bg.png'
 
 export function Home() {
   useEffect(() => {
-    document.title = 'Coffe Delivery | Home'
+    document.title = 'Coffee Delivery | Home'
   }, [])
 
   return (
