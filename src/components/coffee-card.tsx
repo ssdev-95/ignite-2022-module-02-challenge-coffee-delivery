@@ -12,9 +12,6 @@ import {
   useTheme,
   Container,
   IconButton,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
 } from '@chakra-ui/react'
 
 import { ShoppingCartSimple, Minus, Plus } from 'phosphor-react'

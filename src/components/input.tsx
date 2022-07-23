@@ -1,4 +1,4 @@
-import { ChangeEvent, HTMAttributes, useState } from 'react'
+import { ChangeEvent, HTMLAttributes, useState } from 'react'
 
 import {
   useTheme,
@@ -29,8 +29,9 @@ export function Input({ optional = false, ...props }: InputProps) {
           color={theme.colors.base.label}
           fontSize="1rem"
           mr={8}
-          children="Optional"
-        />
+        >
+          Optional
+        </InputRightElement>
       )}
 
       <ChakraInput

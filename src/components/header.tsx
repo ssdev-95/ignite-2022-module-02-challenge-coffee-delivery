@@ -4,7 +4,6 @@ import {
   HStack,
   Flex,
   Spacer,
-  Box,
   IconButton,
 } from '@chakra-ui/react'
 import { MapPin, ShoppingCart } from 'phosphor-react'
