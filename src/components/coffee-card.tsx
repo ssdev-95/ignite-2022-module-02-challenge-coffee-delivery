@@ -16,6 +16,7 @@ import {
 
 import { ShoppingCartSimple, Minus, Plus } from 'phosphor-react'
 import { Coffee } from '../assets/coffees/coffee'
+import { useCart } from '../hooks/useCart'
 
 interface CoffeeProps {
   coffee: Coffee
@@ -23,6 +24,11 @@ interface CoffeeProps {
 
 export function CoffeeCard({ coffee }: CoffeeProps) {
   const theme = useTheme()
+	const { addItemToCart } = useCart()
+
+	function handleAddToCart() {
+		addItemToCart(coffee.id)
+	}
 
   return (
     <Container
@@ -165,6 +171,7 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
                 }}
                 color={theme.colors.white}
                 icon={<ShoppingCartSimple size={24} weight="fill" />}
+								onClick={handleAddToCart}
               />
             </HStack>
           </Flex>
