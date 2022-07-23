@@ -169,59 +169,7 @@ export function Checkout() {
             Selected coffees
           </Text>
 
-          <Container
-            py={6}
-            px={6}
-            bg={theme.colors.base.card}
-            borderRadius="8px 32px 8px 32px"
-          >
-            <Cart />
-
-            <VStack mt={4}>
-              <HStack
-                w="full"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Text>Subtotal</Text>
-
-                <Text>$ 19.80</Text>
-              </HStack>
-
-              <HStack
-                w="full"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Text>Deliver fees</Text>
-
-                <Text>$ 3.95</Text>
-              </HStack>
-
-              <HStack
-                w="full"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Text as="strong" fontSize={24}>
-                  Order total
-                </Text>
-
-                <Text as="strong" fontSize={24}>
-                  $ 23.75
-                </Text>
-              </HStack>
-
-              <Button
-                bg={theme.colors.yellow.medium}
-                color={theme.colors.white}
-                w="full"
-                h={12}
-              >
-                Confirm order
-              </Button>
-            </VStack>
-          </Container>
+					<Cart />
         </VStack>
       </Flex>
     </Container>
