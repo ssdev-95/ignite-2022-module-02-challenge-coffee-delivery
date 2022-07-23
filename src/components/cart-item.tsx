@@ -12,7 +12,7 @@ import {
 
 import { Plus, Minus } from 'phosphor-react'
 import Americano from '../assets/coffees/americano.png'
-import { ICartItem } from '../hooks/useCart'
+import { ICartItem, useCart } from '../hooks/useCart'
 import { coffees } from '../assets/coffees/coffee'
 
 type CartItemProps = {
@@ -21,10 +21,27 @@ type CartItemProps = {
 
 export function CartItem({ item }: CartItemProps) {
   const theme = useTheme()
+	const {
+		removeItemFromCart,
+		increaseCoffeeQuantityByOne,
+		decreaseCoffeeQuantityByOne
+	} = useCart()
 
 	const coffee = coffees.find(
 		coffeeItem => coffeeItem.id === item.coffeeId
 	)
+
+	function handleRemoveFromCart() {
+		removeItemFromCart(item.id)
+	}
+
+	function handleIncreaseQuantity() {
+		increaseCoffeeQuantityByOne(item.coffeeId)
+	}
+
+	function handleDecreaseQuantity() {
+		decreaseCoffeeQuantityByOne(item.coffeeId)
+	}
 
   return (
     <>
@@ -66,6 +83,8 @@ export function CartItem({ item }: CartItemProps) {
                   _hover={{
                     color: theme.colors.purple.medium,
                   }}
+
+									onClick={handleDecreaseQuantity}
                 >
                   <Minus size={8} />
                 </Button>
@@ -94,6 +113,8 @@ export function CartItem({ item }: CartItemProps) {
                   _hover={{
                     color: theme.colors.purple.medium,
                   }}
+
+									onClick={handleIncreaseQuantity}
                 >
                   <Plus size={8} />
                 </Button>
@@ -114,6 +135,8 @@ export function CartItem({ item }: CartItemProps) {
                 bg: theme.colors.purple.light,
                 borderColor: theme.colors.purple.medium,
               }}
+
+							onClick={handleRemoveFromCart}
             >
               <Text fontSize="sm" textTransform="uppercase">
                 remove
