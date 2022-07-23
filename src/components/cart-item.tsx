@@ -83,6 +83,7 @@ export function CartItem({ item }: CartItemProps) {
                   _hover={{
                     color: theme.colors.purple.medium,
                   }}
+									disabled={item.quantity ===	1}
 
 									onClick={handleDecreaseQuantity}
                 >
@@ -113,6 +114,8 @@ export function CartItem({ item }: CartItemProps) {
                   _hover={{
                     color: theme.colors.purple.medium,
                   }}
+
+									disabled={item.quantity === 5}
 
 									onClick={handleIncreaseQuantity}
                 >

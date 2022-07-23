@@ -4,7 +4,6 @@ import {
   Flex,
   Image,
   Badge,
-  Input,
   Button,
   HStack,
   VStack,
@@ -24,11 +23,28 @@ interface CoffeeProps {
 
 export function CoffeeCard({ coffee }: CoffeeProps) {
   const theme = useTheme()
-	const { addItemToCart } = useCart()
+	const {
+		cart,
+		addItemToCart,
+		increaseCoffeeQuantityByOne,
+		decreaseCoffeeQuantityByOne
+	} = useCart()
 
 	function handleAddToCart() {
 		addItemToCart(coffee.id)
 	}
+
+	function handleIncreaseQuantity() {
+		increaseCoffeeQuantityByOne(coffee.id)
+	}
+
+	function handleDecreaseQuantity() {
+		decreaseCoffeeQuantityByOne(coffee.id)
+	}
+
+	const cartCoffee = cart.find(
+		(item) => item.coffeeId === coffee.id
+	)
 
   return (
     <Container
@@ -112,6 +128,9 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
                 bg={theme.colors.base.input}
                 borderRadius={6}
                 alignItems="center"
+								filter={
+									`brightness(${!cartCoffee ? 0.85 : 1})`
+								}
               >
                 <Button
                   left={0}
@@ -127,23 +146,25 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
                   _hover={{
                     color: theme.colors.purple.medium,
                   }}
+									disabled={!cartCoffee}
+									cursor={
+										!cartCoffee ?
+										'not-allowed' :
+										'pointer'
+									}
+									onClick={handleDecreaseQuantity}
                 >
                   <Minus size={8} />
                 </Button>
 
-                <Input
-                  type="number"
-                  borderWidth={0}
-                  defaultValue={0}
-                  step={1}
+                <Text
+									h="full"
                   flex={1}
                   textAlign="center"
                   color={theme.colors.base.text}
-                  _placeholder={{
-                    color: theme.colors.base.subtitle,
-                  }}
-                  focusBorderColor="transparent"
-                />
+                >
+									{cartCoffee?.quantity ?? 0}
+								</Text>
 
                 <Button
                   left={0}
@@ -159,6 +180,13 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
                   _hover={{
                     color: theme.colors.purple.medium,
                   }}
+									cursor={
+										!cartCoffee ?
+										'not-allowed' :
+										'pointer'
+									}
+									disabled={!cartCoffee}
+									onClick={handleIncreaseQuantity}
                 >
                   <Plus size={8} />
                 </Button>
