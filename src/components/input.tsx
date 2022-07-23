@@ -1,4 +1,4 @@
-import { ChangeEvent, HTMLAttributes, useState } from 'react'
+import { HTMLAttributes, useState } from 'react'
 
 import {
   useTheme,
@@ -11,13 +11,11 @@ type InputProps = HTMLAttributes<HTMLInputElement> & {
   optional?: boolean
 }
 
-export function Input({ optional = false, ...props }: InputProps) {
+export function Input({
+	optional = false,
+	...props
+}: InputProps) {
   const theme = useTheme()
-  const [value, setValue] = useState('')
-
-  function handleChange(e: ChangeEvent) {
-    setValue(e.target.value)
-  }
 
   const showOptionalText = optional && !value
 
@@ -37,7 +35,6 @@ export function Input({ optional = false, ...props }: InputProps) {
       <ChakraInput
         bg={theme.colors.base.input}
         color={theme.colors.base.text}
-        onChange={handleChange}
         _placeholder={{
           color: theme.colors.base.label,
         }}

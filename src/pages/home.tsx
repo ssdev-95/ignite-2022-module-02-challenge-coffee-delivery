@@ -9,6 +9,15 @@ import CoffeCup from '../assets/img/coffee-bg.png'
 export function Home() {
   useEffect(() => {
     document.title = 'Coffee Delivery | Home'
+
+		if(navigator && ('geolocation' in navigator)) {
+			navigator
+			  .geolocation
+				.getCurrentPosition((pos) => {
+					alert(pos.coords.latitude)
+				})
+		}
+		const endpoint = 'https://revgeocode.search.hereapi.com/v1'
   }, [])
 
   return (
