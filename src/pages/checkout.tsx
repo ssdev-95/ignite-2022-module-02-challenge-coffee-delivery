@@ -4,31 +4,19 @@ import {
   Flex,
   Text,
   Grid,
-  Input as ChakraInput,
-  Image,
   Button,
   VStack,
   HStack,
-  Divider,
   GridItem,
   useTheme,
   Container,
 } from '@chakra-ui/react'
 
-import {
-  Plus,
-  Bank,
-  Money,
-  Minus,
-  MapPin,
-  CreditCard,
-  CurrencyDollar,
-} from 'phosphor-react'
+import { Bank, Money, MapPin, CreditCard, CurrencyDollar } from 'phosphor-react'
 
+import { Cart } from '../components/cart'
 import { Input } from '../components/input'
 import { PaymentType } from '../components/paymment-type-button'
-
-import Americano from '../assets/coffees/americano.png'
 
 export function Checkout() {
   useEffect(() => {
@@ -36,8 +24,6 @@ export function Checkout() {
   }, [])
 
   const theme = useTheme()
-
-  const cart = ['82hd', '29dj']
 
   return (
     <Container as="main" w={1100} maxW="100vw" pb={10}>
@@ -189,109 +175,7 @@ export function Checkout() {
             bg={theme.colors.base.card}
             borderRadius="8px 32px 8px 32px"
           >
-            {cart.map((item) => (
-              <>
-                <HStack key={item} w="full" mb={4}>
-                  <Image src={Americano} alt="americano coffee" />
-                  <VStack flex={1} w="full" alignItems="flex-start">
-                    <HStack w="full" justifyContent="space-between">
-                      <Text>Americano</Text>
-                      <Text as="strong">$ 9.90</Text>
-                    </HStack>
-                    <HStack w="fit-content">
-                      <HStack h="fit-content">
-                        <Flex
-                          width="80px"
-                          bg={theme.colors.base.button}
-                          borderRadius={6}
-                          alignItems="center"
-                        >
-                          <Button
-                            left={0}
-                            variant="ghost"
-                            h={8}
-                            width={6}
-                            p={0}
-                            bg="transprent"
-                            size="xs"
-                            color={theme.colors.purple.dark}
-                            _active={{
-                              color: theme.colors.purple.medium,
-                            }}
-                            _hover={{
-                              color: theme.colors.purple.medium,
-                            }}
-                          >
-                            <Minus size={8} />
-                          </Button>
-
-                          <ChakraInput
-                            type="number"
-                            borderWidth={0}
-                            placeholder="00"
-                            step={1}
-                            flex={1}
-                            h={8}
-                            textAlign="center"
-                            color={theme.colors.base.title}
-                            _placeholder={{
-                              color: theme.colors.base.subtitle,
-                            }}
-                            focusBorderColor="transparent"
-                          />
-
-                          <Button
-                            left={0}
-                            variant="ghost"
-                            width={6}
-                            h={8}
-                            p={0}
-                            bg="transprent"
-                            size="xs"
-                            color={theme.colors.purple.dark}
-                            _active={{
-                              color: theme.colors.purple.medium,
-                            }}
-                            _hover={{
-                              color: theme.colors.purple.medium,
-                            }}
-                          >
-                            <Plus size={8} />
-                          </Button>
-                        </Flex>
-                      </HStack>
-
-                      <Button
-                        size="sm"
-                        h={8}
-                        bg={theme.colors.base.button}
-                        borderWidth={2}
-                        borderColor="transparent"
-                        _hover={{
-                          bg: theme.colors.purple.light,
-                          borderColor: theme.colors.purple.medium,
-                        }}
-                        _active={{
-                          bg: theme.colors.purple.light,
-                          borderColor: theme.colors.purple.medium,
-                        }}
-                      >
-                        <Text fontSize="sm" textTransform="uppercase">
-                          remove
-                        </Text>
-                      </Button>
-                    </HStack>
-                  </VStack>
-                </HStack>
-
-                <Divider
-                  orientation="horizontal"
-                  size="md"
-                  mb={4}
-                  bg={theme.colors.base.button}
-                />
-              </>
-            ))}
+            <Cart />
 
             <VStack mt={4}>
               <HStack
