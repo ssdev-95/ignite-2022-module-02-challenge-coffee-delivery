@@ -1,13 +1,29 @@
+import { useMemo } from 'react'
+import { SmileySad } from 'phosphor-react'
+
 import {
   Text, Button, HStack, VStack, useTheme, Container
 } from '@chakra-ui/react'
 
 import { CartItem } from './cart-item'
+import { useCart } from '../hooks/useCart'
 
 export function Cart() {
-  const cartItems = ['82hd', '29dj']
+	const fees = 3.95
+  const { cart } = useCart()
 
   const theme = useTheme()
+
+	const subTotal = useMemo(() => {
+		const value = cart.reduce((acc, curr) => {
+			const temp = acc + curr.totalPrice
+			return temp
+		}, 0)
+
+		return value
+	}, [cart])
+
+	const totalOrder = subTotal + fees
 
 	return (
     <Container
@@ -16,14 +32,37 @@ export function Cart() {
       bg={theme.colors.base.card}
       borderRadius="8px 32px 8px 32px"
     >
-      {cartItems.map((item) => (
-        <CartItem key={item} />
-      ))}
+      {!!cart.length ? cart.map((item) => (
+        <CartItem key={item.id} item={item} />
+      )) : (
+				<VStack space={1} mb={4}>
+					<SmileySad
+						size={64}
+						color={theme.colors.base.text}
+					/>
+
+					<Text
+						as="p"
+						mt={6}
+						color={theme.colors.base.text}
+					>
+						No items there.
+					</Text>
+
+					<Text
+						as="p"
+						lineHeight={1}
+						color={theme.colors.base.text}
+					>
+						Add some coffee to cart before come here.
+					</Text>
+				</VStack>
+			)}
 
       <VStack mt={4}>
         <HStack w="full" alignItems="center" justifyContent="space-between">
           <Text>Subtotal</Text>
-          <Text>$ 19.80</Text>
+          <Text>$ {subTotal.toFixed(2)}</Text>
         </HStack>
 
         <HStack w="full" alignItems="center" justifyContent="space-between">
@@ -36,7 +75,7 @@ export function Cart() {
             Order total
           </Text>
           <Text as="strong" fontSize={24}>
-            $ 23.75
+            $ {totalOrder.toFixed(2)}
           </Text>
         </HStack>
 

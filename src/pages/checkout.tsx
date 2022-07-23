@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Flex,
@@ -18,12 +18,22 @@ import { Cart } from '../components/cart'
 import { Input } from '../components/input'
 import { PaymentType } from '../components/paymment-type-button'
 
+type PaymentTypes = 'credit' | 'debit' | 'cash'
+
 export function Checkout() {
+	const [
+		selectedPaymentType, setSelectedPaymentType
+	] = useState<PaymentTypes>('credit')
+
   useEffect(() => {
     document.title = 'Coffee Delivery | Checkout'
   }, [])
 
   const theme = useTheme()
+
+	function togglePaymentType(type:PatmentTypes) {
+		setSelectedPaymentType(type)
+	}
 
   return (
     <Container as="main" w={1100} maxW="100vw" pb={10}>
@@ -118,7 +128,7 @@ export function Checkout() {
                 </Text>
 
                 <Text lineHeight={1.3} color={theme.colors.base.subtitle}>
-                  Perform payment upon deliver. Choose paymont form you desire.
+                  Perform payment upon deliver. Choose payment type form you desire.
                 </Text>
               </VStack>
             </HStack>
@@ -140,19 +150,43 @@ export function Checkout() {
               gap={2}
             >
               <GridItem area="credit">
-                <PaymentType title="Credit card">
-                  <CreditCard size={20} color={theme.colors.purple.medium} />
+                <PaymentType
+									title="Credit card"
+									active={
+										selectedPaymentType === 'credit'
+									}
+									onClick={
+										()=>togglePaymentType('credit')
+									}
+								>
+                  <CreditCard size={20} color={theme.colors.purple.medium}/>
                 </PaymentType>
               </GridItem>
 
               <GridItem area="debit">
-                <PaymentType title="Debit card">
+                <PaymentType
+									title="Debit card"
+									active={
+										selectedPaymentType === 'debit'
+									}
+									onClick={
+										()=>togglePaymentType('debit')
+									}
+								>
                   <Bank size={20} color={theme.colors.purple.medium} />
                 </PaymentType>
               </GridItem>
 
               <GridItem area="cash">
-                <PaymentType title="Cash">
+                <PaymentType
+									title="Cash"
+									active={
+										selectedPaymentType === 'cash'
+									}
+									onClick={
+										()=>togglePaymentType('cash')
+									}
+								>
                   <Money size={20} color={theme.colors.purple.medium} />
                 </PaymentType>
               </GridItem>

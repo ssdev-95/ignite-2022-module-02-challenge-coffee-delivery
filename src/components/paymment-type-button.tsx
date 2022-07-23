@@ -4,9 +4,12 @@ import { Text, Button, HStack, useTheme } from '@chakra-ui/react'
 
 type PaymentTypeProps = HTMLAttributes<HTMLButtonElement> & {
   title: string
+	active?: boolean
 }
 
-export function PaymentType({ title, children, ...props }: PaymentTypeProps) {
+export function PaymentType({
+	active=false, title, children, ...props
+}: PaymentTypeProps) {
   const theme = useTheme()
 
   return (
@@ -15,20 +18,31 @@ export function PaymentType({ title, children, ...props }: PaymentTypeProps) {
       p={3}
       w="full"
       rounded="sm"
-      bg={theme.colors.base.button}
+      bg={
+				active ?
+				theme.colors.purple.light :
+				theme.colors.base.button
+			}
       borderWidth={2}
-      borderColor="transparent"
+      borderColor={
+				active ?
+				theme.colors.purple.medium :
+				"transparent"
+			}
+
       _hover={{
-        bg: theme.colors.purple.light,
-        borderColor: theme.colors.purple.medium,
+        filter: 'brightness(0.9)'
       }}
+
       _active={{
         bg: theme.colors.purple.light,
         borderColor: theme.colors.purple.medium,
       }}
+
       _before={{
         borderRadius: '8px',
       }}
+
       {...props}
     >
       <HStack alignItems="center" h="full">

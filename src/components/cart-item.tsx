@@ -12,19 +12,35 @@ import {
 
 import { Plus, Minus } from 'phosphor-react'
 import Americano from '../assets/coffees/americano.png'
+import { ICartItem } from '../hooks/useCart'
+import { coffees } from '../assets/coffees/coffee'
 
-export function CartItem() {
+type CartItemProps = {
+	item: ICartItem
+}
+
+export function CartItem({ item }: CartItemProps) {
   const theme = useTheme()
+
+	const coffee = coffees.find(
+		coffeeItem => coffeeItem.id === item.coffeeId
+	)
 
   return (
     <>
       <HStack w="full" mb={4}>
-        <Image src={Americano} alt="americano coffee" />
+        <Image
+					src={coffee.image}
+					alt="coffee boladaum"
+				/>
 
         <VStack flex={1} w="full" alignItems="flex-start">
           <HStack w="full" justifyContent="space-between">
-            <Text>Americano</Text>
-            <Text as="strong">$ 9.90</Text>
+            <Text>{coffee.name}</Text>
+            <Text as="strong">
+							$&nbsp;
+							{item.unityPrice}
+						</Text>
           </HStack>
 
           <HStack w="fit-content">
@@ -54,21 +70,14 @@ export function CartItem() {
                   <Minus size={8} />
                 </Button>
 
-                <Input
-                  type="number"
-                  borderWidth={0}
-                  placeholder="00"
-                  defaultValue={0}
-                  step={1}
+                <Text
                   flex={1}
-                  h={8}
+                  h="full"
                   textAlign="center"
-                  color={theme.colors.base.title}
-                  _placeholder={{
-                    color: theme.colors.base.subtitle,
-                  }}
-                  focusBorderColor="transparent"
-                />
+                  color={theme.colors.base.text}
+                >
+									{item.quantity}
+								</Text>
 
                 <Button
                   left={0}

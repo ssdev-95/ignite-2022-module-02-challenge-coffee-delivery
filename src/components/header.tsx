@@ -10,13 +10,20 @@ import {
 	Container,
   IconButton
 } from '@chakra-ui/react'
+
+import { useNavigate } from 'react-router-dom'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { Logo } from './logo'
 import { useCart } from '../hooks/useCart'
 
 export function Header() {
 	const theme = useTheme()
+	const navigate = useNavigate()
 	const { cart } = useCart()
+
+	function handleGoToCart() {
+		navigate('/checkout')
+	}
 
   return (
     <Container
@@ -47,10 +54,11 @@ export function Header() {
 					  icon={
 							<ShoppingCart size={24} weight="fill" />
 						}
+						onClick={handleGoToCart}
 					/>
 					{!!cart.length && (
 						<Badge
-							bg={theme.colors.yellow.medium}
+							bg={theme.colors.yellow.dark}
 							size="sm"
 							rounded="full"
 							h={5}
