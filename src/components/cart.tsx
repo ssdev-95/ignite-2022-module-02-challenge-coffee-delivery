@@ -1,11 +1,15 @@
-import { Text, Button, HStack, VStack, Container } from '@chakra-ui/react'
+import {
+  Text, Button, HStack, VStack, useTheme, Container
+} from '@chakra-ui/react'
 
 import { CartItem } from './cart-item'
 
 export function Cart() {
   const cartItems = ['82hd', '29dj']
 
-  return (
+  const theme = useTheme()
+
+	return (
     <Container
       py={6}
       px={6}
