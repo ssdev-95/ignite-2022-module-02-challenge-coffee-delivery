@@ -14,10 +14,10 @@ import Macchiatto from './macchiato.png'
 import Mochaccino from './mochaccino.png'
 
 export const coffees = [
-  { name: 'American', price: 10.90, image: Americano, id: 'american-38d8' },
+  { name: 'American', price: 10.9, image: Americano, id: 'american-38d8' },
   { name: 'Arabian', price: 35.56, image: Arabe, id: 'arabian-dh3i' },
-  { name: 'Au Latte', price: 18.90, image: AuLatte, id: 'au-latte-ir8g' },
-  { name: 'Capuccino', price: 8.90, image: Capuccino, id: 'capuccino-918j' },
+  { name: 'Au Latte', price: 18.9, image: AuLatte, id: 'au-latte-ir8g' },
+  { name: 'Capuccino', price: 8.9, image: Capuccino, id: 'capuccino-918j' },
   { name: 'Cuban', price: 7.56, image: Cubano, id: 'cuban-e77d' },
   { name: 'Expresso', price: 9.99, image: Expresso, id: 'expresso-8e7h' },
   {
@@ -35,11 +35,11 @@ export const coffees = [
   },
   {
     name: 'Iced Coffer',
-    price: 7.50,
+    price: 7.5,
     image: IcedCoffee,
     id: 'iced-coffee-o28d',
   },
-  { name: 'Ireland', price: 14.60, image: Ireland, id: 'ireland-39rj' },
+  { name: 'Ireland', price: 14.6, image: Ireland, id: 'ireland-39rj' },
   { name: 'Latte', price: 8.99, image: Latte, id: 'latte-o28s' },
   {
     name: 'Macchiatto',

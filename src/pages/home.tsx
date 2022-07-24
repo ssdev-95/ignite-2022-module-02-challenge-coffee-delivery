@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { Container, Box, Text, Flex, Heading } from '@chakra-ui/react'
 
@@ -9,19 +9,17 @@ import CoffeCup from '../assets/img/coffee-bg.png'
 import { useGeolocation } from '../hooks/useGeolocation'
 
 export function Home() {
-	const { getGeolocation, address } = useGeolocation()
+  const { getGeolocation, address } = useGeolocation()
 
   useEffect(() => {
     document.title = 'Coffee Delivery | Home'
-		if(!Object.keys(address).length) {
-			if(navigator && ('geolocation' in navigator)) {
-				navigator
-				  .geolocation
-					.getCurrentPosition(async (pos) => {
-						await getGeolocation(pos.coords)
-					})
-			}
-		}
+    if (!Object.keys(address).length) {
+      if (navigator && 'geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+          await getGeolocation(pos.coords)
+        })
+      }
+    }
   }, [])
 
   return (

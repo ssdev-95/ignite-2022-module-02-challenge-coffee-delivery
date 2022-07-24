@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from 'react'
+import { HTMLAttributes } from 'react'
 
 import {
   useTheme,
@@ -11,10 +11,7 @@ type InputProps = HTMLAttributes<HTMLInputElement> & {
   optional?: boolean
 }
 
-export function Input({
-	optional = false,
-	...props
-}: InputProps) {
+export function Input({ optional = false, ...props }: InputProps) {
   const theme = useTheme()
 
   const showOptionalText = optional && !value

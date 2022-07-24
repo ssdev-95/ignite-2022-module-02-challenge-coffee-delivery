@@ -10,14 +10,14 @@ import { defaultTheme } from './assets/themes/default-theme'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-		<GeoLocationProvider>
-			<CartProvider>
-				<ChakraProvider theme={defaultTheme}>
-				  <BrowserRouter>
-				    <App />
-					</BrowserRouter>
-		    </ChakraProvider>
-			</CartProvider>
-		</GeoLocationProvider>
+    <GeoLocationProvider>
+      <CartProvider>
+        <ChakraProvider theme={defaultTheme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ChakraProvider>
+      </CartProvider>
+    </GeoLocationProvider>
   </React.StrictMode>
 )

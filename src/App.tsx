@@ -14,7 +14,7 @@ export function App() {
         <Route path="/checkout" element={<Checkout />} />
 
         <Route path="/succeed" element={<SucceedOrder />} />
-				<Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )

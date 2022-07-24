@@ -1,7 +1,6 @@
 import {
   Flex,
   Text,
-  Input,
   Image,
   Button,
   HStack,
@@ -11,53 +10,47 @@ import {
 } from '@chakra-ui/react'
 
 import { Plus, Minus } from 'phosphor-react'
-import Americano from '../assets/coffees/americano.png'
 import { ICartItem, useCart } from '../hooks/useCart'
 import { coffees } from '../assets/coffees/coffee'
 
 type CartItemProps = {
-	item: ICartItem
+  item: ICartItem
 }
 
 export function CartItem({ item }: CartItemProps) {
   const theme = useTheme()
-	const {
-		removeItemFromCart,
-		increaseCoffeeQuantityByOne,
-		decreaseCoffeeQuantityByOne
-	} = useCart()
+  const {
+    removeItemFromCart,
+    increaseCoffeeQuantityByOne,
+    decreaseCoffeeQuantityByOne,
+  } = useCart()
 
-	const coffee = coffees.find(
-		coffeeItem => coffeeItem.id === item.coffeeId
-	)
+  const coffee = coffees.find((coffeeItem) => coffeeItem.id === item.coffeeId)
 
-	function handleRemoveFromCart() {
-		removeItemFromCart(item.id)
-	}
+  function handleRemoveFromCart() {
+    removeItemFromCart(item.id)
+  }
 
-	function handleIncreaseQuantity() {
-		increaseCoffeeQuantityByOne(item.coffeeId)
-	}
+  function handleIncreaseQuantity() {
+    increaseCoffeeQuantityByOne(item.coffeeId)
+  }
 
-	function handleDecreaseQuantity() {
-		decreaseCoffeeQuantityByOne(item.coffeeId)
-	}
+  function handleDecreaseQuantity() {
+    decreaseCoffeeQuantityByOne(item.coffeeId)
+  }
 
   return (
     <>
       <HStack w="full" mb={4}>
-        <Image
-					src={coffee.image}
-					alt="coffee boladaum"
-				/>
+        <Image src={coffee.image} alt="coffee boladaum" />
 
         <VStack flex={1} w="full" alignItems="flex-start">
           <HStack w="full" justifyContent="space-between">
             <Text>{coffee.name}</Text>
             <Text as="strong">
-							$&nbsp;
-							{item.unityPrice}
-						</Text>
+              $&nbsp;
+              {item.unityPrice}
+            </Text>
           </HStack>
 
           <HStack w="fit-content">
@@ -83,9 +76,8 @@ export function CartItem({ item }: CartItemProps) {
                   _hover={{
                     color: theme.colors.purple.medium,
                   }}
-									disabled={item.quantity ===	1}
-
-									onClick={handleDecreaseQuantity}
+                  disabled={item.quantity === 1}
+                  onClick={handleDecreaseQuantity}
                 >
                   <Minus size={8} />
                 </Button>
@@ -96,8 +88,8 @@ export function CartItem({ item }: CartItemProps) {
                   textAlign="center"
                   color={theme.colors.base.text}
                 >
-									{item.quantity}
-								</Text>
+                  {item.quantity}
+                </Text>
 
                 <Button
                   left={0}
@@ -114,10 +106,8 @@ export function CartItem({ item }: CartItemProps) {
                   _hover={{
                     color: theme.colors.purple.medium,
                   }}
-
-									disabled={item.quantity === 5}
-
-									onClick={handleIncreaseQuantity}
+                  disabled={item.quantity === 5}
+                  onClick={handleIncreaseQuantity}
                 >
                   <Plus size={8} />
                 </Button>
@@ -138,8 +128,7 @@ export function CartItem({ item }: CartItemProps) {
                 bg: theme.colors.purple.light,
                 borderColor: theme.colors.purple.medium,
               }}
-
-							onClick={handleRemoveFromCart}
+              onClick={handleRemoveFromCart}
             >
               <Text fontSize="sm" textTransform="uppercase">
                 remove
