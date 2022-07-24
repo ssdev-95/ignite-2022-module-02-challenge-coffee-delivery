@@ -35,10 +35,7 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
 
   function handleAddToCart() {
     addItemToCart(coffee.id)
-		toast.success(
-			'Coffee added to cart successfully',
-			TOAST_CONFIG
-		)
+    toast.success('Coffee added to cart successfully', TOAST_CONFIG)
   }
 
   function handleIncreaseQuantity() {

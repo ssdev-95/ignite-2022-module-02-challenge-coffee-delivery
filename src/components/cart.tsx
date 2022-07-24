@@ -17,7 +17,7 @@ export function Cart() {
 
   const theme = useTheme()
 
-	const hasItemsInCart = cart.length
+  const hasItemsInCart = cart.length
 
   return (
     <Container
@@ -67,23 +67,19 @@ export function Cart() {
           color={theme.colors.white}
           w="full"
           h={12}
-					disabled={!hasItemsInCart}
-
-					_hover={{
-						bg: theme.colors.yellow.light
-					}}
-
-					_active={{
-						bg: theme.colors.yellow.light
-					}}
-
-					_disabled={{
-						bg: theme.colors.yellow.dark,
-						cursor: 'not-allowed',
-						pointerEvents: 'none'
-					}}
-
-					type="submit"
+          disabled={!hasItemsInCart}
+          _hover={{
+            bg: theme.colors.yellow.light,
+          }}
+          _active={{
+            bg: theme.colors.yellow.light,
+          }}
+          _disabled={{
+            bg: theme.colors.yellow.dark,
+            cursor: 'not-allowed',
+            pointerEvents: 'none',
+          }}
+          type="submit"
         >
           Confirm order
         </Button>

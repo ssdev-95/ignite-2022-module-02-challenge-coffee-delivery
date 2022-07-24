@@ -32,10 +32,7 @@ export function CartItem({ item }: CartItemProps) {
 
   function handleRemoveFromCart() {
     removeItemFromCart(item.id)
-		toast.success(
-			'Coffee removed from cart successfully',
-			TOAST_CONFIG
-		)
+    toast.success('Coffee removed from cart successfully', TOAST_CONFIG)
   }
 
   function handleIncreaseQuantity() {

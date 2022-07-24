@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <ChakraProvider theme={defaultTheme}>
           <BrowserRouter>
             <App />
-						<ToastContainer />
+            <ToastContainer />
           </BrowserRouter>
         </ChakraProvider>
       </CartProvider>

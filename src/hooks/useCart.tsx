@@ -1,10 +1,4 @@
-import {
-	useMemo,
-	useState,
-	useContext,
-	createContext,
-	ReactNode
-} from 'react'
+import { useMemo, useState, useContext, createContext, ReactNode } from 'react'
 import { coffees } from '../assets/coffees/coffee'
 
 export type ICartItem = {
@@ -17,10 +11,10 @@ export type ICartItem = {
 
 type ContextData = {
   cart: ICartItem[]
-	subTotal:number
-	totalOrder:number
+  subTotal: number
+  totalOrder: number
 
-	resetCart: () => void
+  resetCart: () => void
   addItemToCart: (id: string) => void
   removeItemFromCart: (id: string) => void
   increaseCoffeeQuantityByOne: (id: string) => void
@@ -113,28 +107,28 @@ export function CartProvider({ children }: ProviderProps) {
     setCart(updatedCart)
   }
 
-	function resetCart() {
-		setCart([])
-	}
+  function resetCart() {
+    setCart([])
+  }
 
-	const subTotal = useMemo(() => {
-		const value = cart.reduce((acc, curr) => {
-			const temp = acc + curr.totalPrice
-			return temp
-		}, 0)
+  const subTotal = useMemo(() => {
+    const value = cart.reduce((acc, curr) => {
+      const temp = acc + curr.totalPrice
+      return temp
+    }, 0)
 
-		return value
-	}, [cart])
+    return value
+  }, [cart])
 
-	const totalOrder = subTotal + FEES
+  const totalOrder = subTotal + FEES
 
   return (
     <CartContext.Provider
       value={{
         cart,
-				subTotal,
-				totalOrder,
-				resetCart,
+        subTotal,
+        totalOrder,
+        resetCart,
         addItemToCart,
         removeItemFromCart,
         increaseCoffeeQuantityByOne,

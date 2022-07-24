@@ -36,11 +36,7 @@ export function PaymentType({
       }}
       {...props}
     >
-      <HStack
-				alignItems="center"
-				justifyContent="flex-start"
-				h="full"
-			>
+      <HStack alignItems="center" justifyContent="flex-start" h="full">
         {children}
 
         <Text

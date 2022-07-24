@@ -2,7 +2,7 @@ import {
   Box,
   Flex,
   Text,
-	Link,
+  Link,
   Image,
   HStack,
   VStack,
@@ -40,51 +40,38 @@ export function NotFound() {
             display="inline-block"
             mt={12}
             px={6}
-						pt={6}
-						pb={12}
+            pt={6}
+            pb={12}
             borderWidth={1}
             borderRadius="6px 32px 6px 32px"
             borderColor={theme.colors.purple.medium}
             w="full"
           >
-						<HStack
-							alignItems="flex-start"
-							justifyContent="space-between"
-						>
-							<VStack
-								alignItems="flex-start"
-								h="full"
-							>
-				        <Text
-									as="strong"
-									fontSize="md"
-									color={theme.colors.base.text}
-								>
-									If you think this was a mistake,
-								</Text>
-	
-								<Text
-									as="strong"
-									fontSize="md"
-									color={theme.colors.base.text}
-								>
-									Contact us at
-									&nbsp;<Link
-										to="https://google.com.br"
-										target="_blank"
-										rel="external"
-									>
-										Github
-									</Link>.
-								</Text>
-							</VStack>
+            <HStack alignItems="flex-start" justifyContent="space-between">
+              <VStack alignItems="flex-start" h="full">
+                <Text as="strong" fontSize="md" color={theme.colors.base.text}>
+                  If you think this was a mistake,
+                </Text>
 
-							<SmileySad
-								size={64}
-								weight="duotone"
-								color={theme.colors.purple.dark}
-							/>
-						</HStack>
+                <Text as="strong" fontSize="md" color={theme.colors.base.text}>
+                  Contact us at &nbsp;
+                  <Link
+                    to="https://google.com.br"
+                    target="_blank"
+                    rel="external"
+                  >
+                    Github
+                  </Link>
+                  .
+                </Text>
+              </VStack>
+
+              <SmileySad
+                size={64}
+                weight="duotone"
+                color={theme.colors.purple.dark}
+              />
+            </HStack>
           </Box>
         </VStack>
 

@@ -11,30 +11,21 @@ import {
   Container,
 } from '@chakra-ui/react'
 
-import {
-	Timer,
-	MapPin,
-	CurrencyDollar
-} from 'phosphor-react'
+import { Timer, MapPin, CurrencyDollar } from 'phosphor-react'
 
-import {
-	useLocation,
-	Navigate
-} from 'react-router-dom'
+import { useLocation, Navigate } from 'react-router-dom'
 
 import Deliver from '../assets/img/deliver-illustration.svg'
 
 export function SucceedOrder() {
   const theme = useTheme()
-	const { state } = useLocation()
+  const { state } = useLocation()
 
-	if(!state) {
-		return (
-			<Navigate to="/" />
-		)
-	}
+  if (!state) {
+    return <Navigate to="/" />
+  }
 
-	const { order } = state
+  const { order } = state
 
   return (
     <Container as="main" mb={12} pt={12} w="1100px" maxW="100vw">
@@ -71,9 +62,14 @@ export function SucceedOrder() {
               <VStack justifyContent="center" alignItems="flex-start">
                 <Text lineHeight={1}>
                   Deliver at&nbsp;
-                  <Text as="strong">{order.address.street}, {order.address.houseNumber}</Text>
+                  <Text as="strong">
+                    {order.address.street}, {order.address.houseNumber}
+                  </Text>
                 </Text>
-                <Text lineHeight={1}>{order.address.district} - {order.address.city}, {order.address.stateCode}</Text>
+                <Text lineHeight={1}>
+                  {order.address.district} - {order.address.city},{' '}
+                  {order.address.stateCode}
+                </Text>
               </VStack>
             </HStack>
 
@@ -101,9 +97,9 @@ export function SucceedOrder() {
 
                 <Text as="strong" lineHeight={1}>
                   {order.paymentType === 'credit' && 'Credit card'}
-									{order.paymentType === 'debit' && 'Debit card'}
-									{order.paymentType === 'cash' && 'Cash'}
-									{order.paymentType === 'pix' && 'Pix'}
+                  {order.paymentType === 'debit' && 'Debit card'}
+                  {order.paymentType === 'cash' && 'Cash'}
+                  {order.paymentType === 'pix' && 'Pix'}
                 </Text>
               </VStack>
             </HStack>
