@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Container, Box, Text, Flex, Heading } from '@chakra-ui/react'
 
@@ -6,18 +6,22 @@ import { Coffee, coffees } from '../assets/coffees/coffee'
 import { CoffeeCard } from '../components/coffee-card'
 import CoffeCup from '../assets/img/coffee-bg.png'
 
+import { useGeolocation } from '../hooks/useGeolocation'
+
 export function Home() {
+	const { getGeolocation, address } = useGeolocation()
+
   useEffect(() => {
     document.title = 'Coffee Delivery | Home'
-
-		if(navigator && ('geolocation' in navigator)) {
-			navigator
-			  .geolocation
-				.getCurrentPosition((pos) => {
-					alert(pos.coords.latitude)
-				})
+		if(!Object.keys(address).length) {
+			if(navigator && ('geolocation' in navigator)) {
+				navigator
+				  .geolocation
+					.getCurrentPosition(async (pos) => {
+						await getGeolocation(pos.coords)
+					})
+			}
 		}
-		const endpoint = 'https://revgeocode.search.hereapi.com/v1'
   }, [])
 
   return (

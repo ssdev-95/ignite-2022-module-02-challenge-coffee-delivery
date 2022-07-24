@@ -20,7 +20,7 @@ type ContextData = {
 	decreaseCoffeeQuantityByOne: (id:string) => void
 }
 
-type ProviderProps = {
+export type ProviderProps = {
 	children: ReactNode
 }
 

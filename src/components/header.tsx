@@ -12,14 +12,18 @@ import {
 } from '@chakra-ui/react'
 
 import { useNavigate } from 'react-router-dom'
-import { MapPin, ShoppingCart } from 'phosphor-react'
+import {
+	MapPin, ShoppingCart, X as IconX
+} from 'phosphor-react'
 import { Logo } from './logo'
 import { useCart } from '../hooks/useCart'
+import { useGeolocation } from '../hooks/useGeolocation'
 
 export function Header() {
 	const theme = useTheme()
 	const navigate = useNavigate()
 	const { cart } = useCart()
+	const { address } = useGeolocation()
 
 	function handleGoToCart() {
 		navigate('/checkout')
@@ -40,10 +44,26 @@ export function Header() {
           px={2}
           borderRadius={8}
           color={theme.colors.purple.medium}
+					position="relative"
         >
           <MapPin size={24} weight="fill" />
 
-          <Text>Manaus, AM</Text>
+          {!!Object.keys(address).length ? (
+						<Text>
+							{`${address.city}, ${address.stateCode}`}
+						</Text>
+					) : (
+						<IconX
+							color="red"
+							weight="fill"
+							size={32}
+
+							style={{
+								position:'absolute',
+								right: 4
+							}}
+						/>
+					)}
         </HStack>
 
 				<Box position="relative">
