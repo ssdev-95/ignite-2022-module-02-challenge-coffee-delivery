@@ -67,27 +67,27 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
         <Box mx="auto" width="full">
           <HStack w="full" spacing={2}>
             {coffee.categories.map((category) => (
-							<Badge
-								bg={theme.colors.yellow.light}
-	              py={1}
-		            px={3}
-								mx="auto"
-								flex={coffee.categories.length > 1 ? 1 : 0.5}
-			          rounded="sm"
-								key={category}
-				      >
-					      <Text
-									as="p"
-									color={theme.colors.yellow.dark}
-									my="auto"
-									mx="auto"
-									h="full"
-									textAlign="center"
-								>
-						      {category}
-							  </Text>
-	            </Badge>
-						))}
+              <Badge
+                bg={theme.colors.yellow.light}
+                py={1}
+                px={3}
+                mx="auto"
+                flex={coffee.categories.length > 1 ? 1 : 0.5}
+                rounded="sm"
+                key={category}
+              >
+                <Text
+                  as="p"
+                  color={theme.colors.yellow.dark}
+                  my="auto"
+                  mx="auto"
+                  h="full"
+                  textAlign="center"
+                >
+                  {category}
+                </Text>
+              </Badge>
+            ))}
           </HStack>
         </Box>
         <Text
@@ -101,12 +101,12 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
           {coffee.name}
         </Text>
         <Text
-					as="p"
-					mx="auto"
-					textAlign="center"
-					color={theme.colors.base.text}
-				>
-					{coffee.description}
+          as="p"
+          mx="auto"
+          textAlign="center"
+          color={theme.colors.base.text}
+        >
+          {coffee.description}
         </Text>
         <Spacer />
         <Spacer />
