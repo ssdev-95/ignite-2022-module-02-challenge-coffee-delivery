@@ -13,7 +13,10 @@ import {
   IconButton,
 } from '@chakra-ui/react'
 
+import { toast } from 'react-toastify'
 import { ShoppingCartSimple, Minus, Plus } from 'phosphor-react'
+
+import { TOAST_CONFIG } from '../pages/home'
 import { Coffee } from '../assets/coffees/coffee'
 import { useCart } from '../hooks/useCart'
 
@@ -32,6 +35,10 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
 
   function handleAddToCart() {
     addItemToCart(coffee.id)
+		toast.success(
+			'Coffee added to cart successfully',
+			TOAST_CONFIG
+		)
   }
 
   function handleIncreaseQuantity() {

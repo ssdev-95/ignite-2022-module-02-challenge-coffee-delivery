@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { SmileySad } from 'phosphor-react'
 
 import {
@@ -11,33 +10,14 @@ import {
 } from '@chakra-ui/react'
 
 import { CartItem } from './cart-item'
-import { useCart } from '../hooks/useCart'
+import { useCart, FEES } from '../hooks/useCart'
 
-type CartProps = {
-	onSubmit: (total:number) => void
-}
-
-export function Cart({ onSubmit }:CartProps) {
-  const fees = 3.95
-  const { cart } = useCart()
+export function Cart() {
+  const { cart, subTotal, totalOrder } = useCart()
 
   const theme = useTheme()
 
-  const subTotal = useMemo(() => {
-    const value = cart.reduce((acc, curr) => {
-      const temp = acc + curr.totalPrice
-      return temp
-    }, 0)
-
-    return value
-  }, [cart])
-
-  const totalOrder = subTotal + fees
 	const hasItemsInCart = cart.length
-
-	function handleSubmitOrder() {
-		onSubmit(totalOrder)
-	}
 
   return (
     <Container
@@ -70,7 +50,7 @@ export function Cart({ onSubmit }:CartProps) {
 
         <HStack w="full" alignItems="center" justifyContent="space-between">
           <Text>Deliver fees</Text>
-          <Text>$ 3.95</Text>
+          <Text>$ {FEES}</Text>
         </HStack>
 
         <HStack w="full" alignItems="center" justifyContent="space-between">
@@ -103,7 +83,7 @@ export function Cart({ onSubmit }:CartProps) {
 						pointerEvents: 'none'
 					}}
 
-					onClick={handleSubmitOrder}
+					type="submit"
         >
           Confirm order
         </Button>

@@ -1,4 +1,10 @@
-import { useState, useContext, createContext, ReactNode } from 'react'
+import {
+	useMemo,
+	useState,
+	useContext,
+	createContext,
+	ReactNode
+} from 'react'
 import { coffees } from '../assets/coffees/coffee'
 
 export type ICartItem = {
@@ -11,6 +17,8 @@ export type ICartItem = {
 
 type ContextData = {
   cart: ICartItem[]
+	subTotal:number
+	totalOrder:number
 
 	resetCart: () => void
   addItemToCart: (id: string) => void
@@ -25,6 +33,7 @@ export type ProviderProps = {
 
 const CartContext = createContext({} as ContextData)
 
+export const FEES = 3.95
 export function CartProvider({ children }: ProviderProps) {
   const [cart, setCart] = useState<ICartItem[]>([])
 
@@ -108,10 +117,23 @@ export function CartProvider({ children }: ProviderProps) {
 		setCart([])
 	}
 
+	const subTotal = useMemo(() => {
+		const value = cart.reduce((acc, curr) => {
+			const temp = acc + curr.totalPrice
+			return temp
+		}, 0)
+
+		return value
+	}, [cart])
+
+	const totalOrder = subTotal + FEES
+
   return (
     <CartContext.Provider
       value={{
         cart,
+				subTotal,
+				totalOrder,
 				resetCart,
         addItemToCart,
         removeItemFromCart,

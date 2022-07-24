@@ -8,18 +8,44 @@ import CoffeCup from '../assets/img/coffee-bg.png'
 
 import { useGeolocation } from '../hooks/useGeolocation'
 
+import { toast } from 'react-toastify'
+
+export const TOAST_CONFIG = {
+	position: "top-right",
+	autoClose: 3000,
+	hideProgressBar: false,
+	closeOnClick: true,
+	pauseOnHover: true,
+	draggable: true,
+	progress: undefined
+}
+
 export function Home() {
   const { getGeolocation, address } = useGeolocation()
 
   useEffect(() => {
     document.title = 'Coffee Delivery | Home'
+
     if (!Object.keys(address).length) {
       if (navigator && 'geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(async (pos) => {
+					toast.success(
+						'Granted location permissions',
+						TOAST_CONFIG
+					)
           await getGeolocation(pos.coords)
-        })
+        }, (error) => {
+					if(error) {
+						console.error(error)
+
+						toast.error(
+							error.message,
+							TOAST_CONFIG
+						)
+					}
+				})
       }
-    }
+		}
   }, [])
 
   return (

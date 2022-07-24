@@ -9,6 +9,9 @@ import {
   useTheme,
 } from '@chakra-ui/react'
 
+import { toast } from 'react-toastify'
+
+import { TOAST_CONFIG } from '../pages/home'
 import { Plus, Minus } from 'phosphor-react'
 import { ICartItem, useCart } from '../hooks/useCart'
 import { coffees } from '../assets/coffees/coffee'
@@ -29,6 +32,10 @@ export function CartItem({ item }: CartItemProps) {
 
   function handleRemoveFromCart() {
     removeItemFromCart(item.id)
+		toast.success(
+			'Coffee removed from cart successfully',
+			TOAST_CONFIG
+		)
   }
 
   function handleIncreaseQuantity() {

@@ -1,5 +1,5 @@
 import {
-	useEffect, useState, ChangeEvent
+	useEffect, useState, FormEvent, ChangeEvent
 } from 'react'
 
 import {
@@ -23,7 +23,9 @@ import {
 } from 'phosphor-react'
 
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
+import { TOAST_CONFIG } from '../pages/home'
 import { Cart } from '../components/cart'
 import { Input } from '../components/input'
 import { PaymentType } from '../components/paymment-type-button'
@@ -44,7 +46,7 @@ type OrderType = {
 export function Checkout() {
 	const navigate = useNavigate()
 	const { address } = useGeolocation()
-	const { cart, resetCart } = useCart()
+	const { cart, totalOrder, resetCart } = useCart()
 
   const [selectedPaymentType, setSelectedPaymentType] =
     useState<PaymentTypes>('pix')
@@ -52,7 +54,7 @@ export function Checkout() {
 	const [newOrder, setNewOrder] = useState<OrderType>({
 		address,
 		items: cart,
-		total: 0
+		total: Number(totalOrder.toFixed(2))
 	} as OrderType)
 
   useEffect(() => {
@@ -79,22 +81,37 @@ export function Checkout() {
 		setNewOrder(order)
 	}
 
-	function handleSendOrder(total:number) {
+	function handleSendOrder(evnt:FormEvent<HTMLFormElement>) {
+		evnt.preventDefault()
+
+		if(!Object.values(newOrder.address).length) {
+			toast.error(
+				'Cannot place order without a valid address',
+				TOAST_CONFIG
+			)
+
+			return
+		}
+	
 		const order = {
 			...newOrder,
 			items: cart,
 			paymentType: selectedPaymentType,
-			total: Number(total.toFixed(2))
+			total: Number(totalOrder.toFixed(2))
 		}
-		alert('Order success fully placed')
+		toast.success(
+			'Order successfully placed',
+			TOAST_CONFIG
+		)
 		resetCart()
 		setTimeout(() => {
 			navigate('/succeed', { state: { order } })
-		}, 3000)
+		}, 4000)
 	}
 
   return (
     <Container as="main" w={1100} maxW="100vw" pb={10}>
+			<form onSubmit={handleSendOrder}>
       <Flex gap={8} direction={{ base: 'column', md: 'row' }}>
         <VStack space={8}>
           <Text
@@ -296,9 +313,10 @@ export function Checkout() {
             Selected coffees
           </Text>
 
-          <Cart onSubmit={handleSendOrder} />
+          <Cart />
         </VStack>
       </Flex>
+			</form>
     </Container>
   )
 }
