@@ -13,7 +13,11 @@ import {
 import { CartItem } from './cart-item'
 import { useCart } from '../hooks/useCart'
 
-export function Cart() {
+type CartProps = {
+	onSubmit: (total:number) => void
+}
+
+export function Cart({ onSubmit }:CartProps) {
   const fees = 3.95
   const { cart } = useCart()
 
@@ -29,6 +33,11 @@ export function Cart() {
   }, [cart])
 
   const totalOrder = subTotal + fees
+	const hasItemsInCart = cart.length
+
+	function handleSubmitOrder() {
+		onSubmit(totalOrder)
+	}
 
   return (
     <Container
@@ -78,6 +87,23 @@ export function Cart() {
           color={theme.colors.white}
           w="full"
           h={12}
+					disabled={!hasItemsInCart}
+
+					_hover={{
+						bg: theme.colors.yellow.light
+					}}
+
+					_active={{
+						bg: theme.colors.yellow.light
+					}}
+
+					_disabled={{
+						bg: theme.colors.yellow.dark,
+						cursor: 'not-allowed',
+						pointerEvents: 'none'
+					}}
+
+					onClick={handleSubmitOrder}
         >
           Confirm order
         </Button>

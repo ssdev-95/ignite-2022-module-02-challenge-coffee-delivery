@@ -11,10 +11,10 @@ type InputProps = HTMLAttributes<HTMLInputElement> & {
   optional?: boolean
 }
 
-export function Input({ optional = false, ...props }: InputProps) {
+export function Input({ optional = false, value, ...props }: InputProps) {
   const theme = useTheme()
 
-  const showOptionalText = optional && !value
+  const showOptionalText = optional & !value
 
   return (
     <InputGroup>

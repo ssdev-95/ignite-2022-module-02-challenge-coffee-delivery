@@ -27,10 +27,14 @@ export function Header() {
     navigate('/checkout')
   }
 
+	function handleGoToHome() {
+		navigate('/', { replace:true })
+	}
+
   return (
     <Container as="header" width="1100px" maxWidth="100vw" py="1.5rem">
       <Flex>
-        <Logo />
+        <Logo onClick={handleGoToHome} />
         <Spacer />
         <HStack
           bg={theme.colors.purple.light}

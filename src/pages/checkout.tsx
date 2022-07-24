@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import {
+	useEffect, useState, ChangeEvent
+} from 'react'
 
 import {
-  Flex,
+  Flex,	
   Text,
   Grid,
   VStack,
@@ -11,17 +13,47 @@ import {
   Container,
 } from '@chakra-ui/react'
 
-import { Bank, Money, MapPin, CreditCard, CurrencyDollar } from 'phosphor-react'
+import {
+	Bank,
+	Money,
+	MapPin,
+	SquaresFour,
+	CreditCard,
+	CurrencyDollar,
+} from 'phosphor-react'
+
+import { useNavigate } from 'react-router-dom'
 
 import { Cart } from '../components/cart'
 import { Input } from '../components/input'
 import { PaymentType } from '../components/paymment-type-button'
+import { ICartItem, useCart } from '../hooks/useCart'
 
-type PaymentTypes = 'credit' | 'debit' | 'cash'
+import {
+	useGeolocation, Address
+} from '../hooks/useGeolocation'
+
+type PaymentTypes = 'credit' | 'debit' | 'cash' | 'pix'
+
+type OrderType = {
+	address: Address & { complement?:string },
+	items: ICartItem[],
+	total: number
+}
 
 export function Checkout() {
+	const navigate = useNavigate()
+	const { address } = useGeolocation()
+	const { cart, resetCart } = useCart()
+
   const [selectedPaymentType, setSelectedPaymentType] =
-    useState<PaymentTypes>('credit')
+    useState<PaymentTypes>('pix')
+
+	const [newOrder, setNewOrder] = useState<OrderType>({
+		address,
+		items: cart,
+		total: 0
+	} as OrderType)
 
   useEffect(() => {
     document.title = 'Coffee Delivery | Checkout'
@@ -32,6 +64,34 @@ export function Checkout() {
   function togglePaymentType(type: PatmentTypes) {
     setSelectedPaymentType(type)
   }
+
+	function handleInputTyping(evnt:ChangeEvent) {
+		const { name, value } = evnt.target
+
+		const order = {
+			...newOrder,
+			address: {
+				...newOrder.address,
+				[name]: value
+			}
+		}
+		
+		setNewOrder(order)
+	}
+
+	function handleSendOrder(total:number) {
+		const order = {
+			...newOrder,
+			items: cart,
+			paymentType: selectedPaymentType,
+			total: Number(total.toFixed(2))
+		}
+		alert('Order success fully placed')
+		resetCart()
+		setTimeout(() => {
+			navigate('/succeed', { state: { order } })
+		}, 3000)
+	}
 
   return (
     <Container as="main" w={1100} maxW="100vw" pb={10}>
@@ -68,7 +128,7 @@ export function Checkout() {
               }}
               templateColumns={{
                 base: '37% 44% 16%',
-                md: '38% 48% 11%',
+                md: '37% 48% 12%',
               }}
               templateAreas={{
                 base: `
@@ -87,31 +147,59 @@ export function Checkout() {
               }}
             >
               <GridItem area="cep">
-                <Input placeholder="CEP" />
+                <Input
+									name="postalCode"
+									placeholder="CEP"
+									defaultValue={address.postalCode}
+								/>
               </GridItem>
 
               <GridItem area="str">
-                <Input placeholder="Street" />
+                <Input
+									name="street"
+									placeholder="Street"
+									defaultValue={address.street}
+								/>
               </GridItem>
 
               <GridItem area="number">
-                <Input placeholder="Number" />
+                <Input
+									name="houseNumber"
+									placeholder="Number"
+									defaultValue={address.houseNumber}
+								/>
               </GridItem>
 
               <GridItem area="compl">
-                <Input placeholder="Complemento" optional />
+                <Input
+									name="complement"
+									placeholder="Complemento"
+									optional
+								/>
               </GridItem>
 
               <GridItem area="nbor">
-                <Input placeholder="Bairro em ingles" />
+                <Input
+									name="district"
+									placeholder="District"
+									defaultValue={address.district}
+								/>
               </GridItem>
 
               <GridItem area="city">
-                <Input placeholder="City" />
+                <Input
+									name="citt"
+									placeholder="City"
+									defaultValue={address.city}
+								/>
               </GridItem>
 
               <GridItem area="uf">
-                <Input placeholder="UF" />
+                <Input
+									name="stateCode"
+									placeholder="UF"
+									defaultValue={address.stateCode}
+								/>
               </GridItem>
             </Grid>
           </Container>
@@ -174,9 +262,27 @@ export function Checkout() {
                   active={selectedPaymentType === 'cash'}
                   onClick={() => togglePaymentType('cash')}
                 >
-                  <Money size={20} color={theme.colors.purple.medium} />
+                  <Money
+										size={20}
+										color={theme.colors.purple.medium}
+									/>
                 </PaymentType>
               </GridItem>
+							<GridItem>
+								<PaymentType
+									title="Pix"
+									active={selectedPaymentType === 'pix'}
+									onClick={() => togglePaymentType('pix')}
+								>
+									<SquaresFour
+										size={20}
+										color={theme.colors.purple.medium}
+										style={{
+											transform: 'rotate(45deg)'
+										}}
+									/>
+								</PaymentType>
+							</GridItem>
             </Grid>
           </Container>
         </VStack>
@@ -190,7 +296,7 @@ export function Checkout() {
             Selected coffees
           </Text>
 
-          <Cart />
+          <Cart onSubmit={handleSendOrder} />
         </VStack>
       </Flex>
     </Container>

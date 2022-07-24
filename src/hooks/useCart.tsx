@@ -12,6 +12,7 @@ export type ICartItem = {
 type ContextData = {
   cart: ICartItem[]
 
+	resetCart: () => void
   addItemToCart: (id: string) => void
   removeItemFromCart: (id: string) => void
   increaseCoffeeQuantityByOne: (id: string) => void
@@ -103,10 +104,15 @@ export function CartProvider({ children }: ProviderProps) {
     setCart(updatedCart)
   }
 
+	function resetCart() {
+		setCart([])
+	}
+
   return (
     <CartContext.Provider
       value={{
         cart,
+				resetCart,
         addItemToCart,
         removeItemFromCart,
         increaseCoffeeQuantityByOne,
