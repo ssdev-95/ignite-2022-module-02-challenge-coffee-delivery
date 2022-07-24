@@ -64,29 +64,30 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
         alt={coffee.name}
       />
       <VStack spacing={2}>
-        <Box mx="auto" width="fit-content">
-          <HStack spacing={4}>
-            <Badge
-              bg={theme.colors.yellow.light}
-              py={1}
-              px={2}
-              borderRadius={24}
-            >
-              <Text as="p" color={theme.colors.yellow.dark} my="auto">
-                standard
-              </Text>
-            </Badge>
-
-            <Badge
-              bg={theme.colors.yellow.light}
-              py={1}
-              px={2}
-              borderRadius={24}
-            >
-              <Text as="p" color={theme.colors.yellow.dark} my="auto">
-                standard
-              </Text>
-            </Badge>
+        <Box mx="auto" width="full">
+          <HStack w="full" spacing={2}>
+            {coffee.categories.map((category) => (
+							<Badge
+								bg={theme.colors.yellow.light}
+	              py={1}
+		            px={3}
+								mx="auto"
+								flex={coffee.categories.length > 1 ? 1 : 0.5}
+			          rounded="sm"
+								key={category}
+				      >
+					      <Text
+									as="p"
+									color={theme.colors.yellow.dark}
+									my="auto"
+									mx="auto"
+									h="full"
+									textAlign="center"
+								>
+						      {category}
+							  </Text>
+	            </Badge>
+						))}
           </HStack>
         </Box>
         <Text
@@ -99,8 +100,13 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
         >
           {coffee.name}
         </Text>
-        <Text as="p" mx="auto" color={theme.colors.base.text}>
-          Coffee du baum!
+        <Text
+					as="p"
+					mx="auto"
+					textAlign="center"
+					color={theme.colors.base.text}
+				>
+					{coffee.description}
         </Text>
         <Spacer />
         <Spacer />
