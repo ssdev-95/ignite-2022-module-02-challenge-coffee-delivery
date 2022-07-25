@@ -26,6 +26,8 @@
 
 * Phosphor Icons
 
+* React Toastify
+
 * Axios
 
 * Eruda
