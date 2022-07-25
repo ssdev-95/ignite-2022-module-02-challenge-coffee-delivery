@@ -54,15 +54,15 @@ export function GeoLocationProvider({ children }: ProviderProps) {
     const url = `/revgeocode?at=${coords.latitude},${coords.longitude}&apiKey=${
       import.meta.env.VITE_API_KEY
     }`
-    const { data } = await api.get<GeoResponse>(url).catch((err) => {
-      alert(err)
-    })
+    const { data }: GeoResponse | any = await api
+      .get<GeoResponse>(url)
+      .catch((err) => {
+        alert(err)
+      })
 
     localStorage.setItem(storeKey, JSON.stringify(data.items[0].address))
     setAddress(data.items[0].address)
   }
-
-  //useEffect(() => alert(JSON.stringify(address)), [address])
 
   return (
     <GeoLocationContext.Provider

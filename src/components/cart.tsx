@@ -29,7 +29,7 @@ export function Cart() {
       {cart.length ? (
         cart.map((item) => <CartItem key={item.id} item={item} />)
       ) : (
-        <VStack space={1} mb={4}>
+        <VStack spacing={1} mb={4}>
           <SmileySad size={64} color={theme.colors.base.text} />
 
           <Text as="p" mt={6} color={theme.colors.base.text}>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Container, Box, Text, Flex, Heading } from '@chakra-ui/react'
+import { Container, Box, Text, Flex, Heading, useTheme } from '@chakra-ui/react'
 
 import { Coffee, coffees } from '../assets/coffees/coffee'
 import { CoffeeCard } from '../components/coffee-card'
@@ -8,9 +8,9 @@ import CoffeCup from '../assets/img/coffee-bg.png'
 
 import { useGeolocation } from '../hooks/useGeolocation'
 
-import { toast } from 'react-toastify'
+import { toast, ToastOptions } from 'react-toastify'
 
-export const TOAST_CONFIG = {
+export const TOAST_CONFIG: ToastOptions = {
   position: 'top-right',
   autoClose: 3000,
   hideProgressBar: false,
@@ -21,6 +21,7 @@ export const TOAST_CONFIG = {
 }
 
 export function Home() {
+  const theme = useTheme()
   const { getGeolocation, address } = useGeolocation()
 
   useEffect(() => {
@@ -62,7 +63,7 @@ export function Home() {
               fontSize={48}
               textAlign={['center', 'start']}
               lineHeight={1.3}
-              color={(theme) => theme.colors.base.title}
+              color={theme.colors.base.title}
             >
               Find the perfect coffee for every time.
             </Heading>
@@ -70,10 +71,10 @@ export function Home() {
               fontSize={16}
               textAlign={['center', 'start']}
               mt={4}
-              color={(theme) => theme.colors.base.subtitle}
+              color={theme.colors.base.subtitle}
             >
               With{' '}
-              <Text as="span" color={(theme) => theme.colors.purple.dark}>
+              <Text as="span" color={theme.colors.purple.dark}>
                 Coffee Delivery&trade;
               </Text>{' '}
               you receive you coffee wherever you may be, at any time.
@@ -96,7 +97,7 @@ export function Home() {
           lineHeight={1.3}
           textAlign="left"
           mb={10}
-          color={(theme) => theme.colors.base.title}
+          color={theme.colors.base.title}
         >
           Our coffees
         </Heading>

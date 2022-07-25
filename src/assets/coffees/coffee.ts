@@ -131,6 +131,4 @@ export const coffees = [
   },
 ]
 
-export type Coffee = Omit<typeof coffees[0], 'categories'> & {
-  categories: Category[]
-}
+export type Coffee = typeof coffees[0]

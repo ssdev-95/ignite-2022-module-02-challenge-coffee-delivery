@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react'
+import { InputHTMLAttributes } from 'react'
 
 import {
   useTheme,
@@ -7,14 +7,18 @@ import {
   Input as ChakraInput,
 } from '@chakra-ui/react'
 
-type InputProps = HTMLAttributes<HTMLInputElement> & {
+type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   optional?: boolean
 }
 
-export function Input({ optional = false, value, ...props }: InputProps) {
+export function Input({
+  optional = false,
+  defaultValue,
+  ...props
+}: InputProps) {
   const theme = useTheme()
 
-  const showOptionalText = optional & !value
+  const showOptionalText = optional && !defaultValue
 
   return (
     <InputGroup>
@@ -30,6 +34,7 @@ export function Input({ optional = false, value, ...props }: InputProps) {
       )}
 
       <ChakraInput
+        as="input"
         bg={theme.colors.base.input}
         color={theme.colors.base.text}
         _placeholder={{
@@ -37,6 +42,7 @@ export function Input({ optional = false, value, ...props }: InputProps) {
         }}
         focusBorderColor={theme.colors.yellow.medium}
         {...props}
+        size="md"
       />
     </InputGroup>
   )

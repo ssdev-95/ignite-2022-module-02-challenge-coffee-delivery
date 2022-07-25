@@ -56,12 +56,12 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
       borderRadius="8px 32px 8px 32px"
     >
       <Image
-        src={coffee.image}
+        src={coffee?.image}
         boxSize={120}
         mx="auto"
         mt="-10%"
         mb={2}
-        alt={coffee.name}
+        alt={coffee?.name}
       />
       <VStack spacing={2}>
         <Box mx="auto" width="full">
@@ -72,7 +72,7 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
                 py={1}
                 px={3}
                 mx="auto"
-                flex={coffee.categories.length > 1 ? 1 : 0.5}
+                flex={coffee?.categories.length > 1 ? 1 : 0.5}
                 rounded="sm"
                 key={category}
               >
@@ -98,7 +98,7 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
           fontFamily="'Baloo 2', cursive"
           color={theme.colors.base.text}
         >
-          {coffee.name}
+          {coffee?.name}
         </Text>
         <Text
           as="p"
@@ -106,7 +106,7 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
           textAlign="center"
           color={theme.colors.base.text}
         >
-          {coffee.description}
+          {coffee?.description}
         </Text>
         <Spacer />
         <Spacer />
@@ -127,7 +127,7 @@ export function CoffeeCard({ coffee }: CoffeeProps) {
               >
                 $&nbsp;
               </Text>
-              {coffee.price}
+              {coffee?.price ?? '0.00'}
             </Text>
             <Spacer />
             <HStack>

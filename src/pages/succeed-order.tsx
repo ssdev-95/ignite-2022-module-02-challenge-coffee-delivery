@@ -15,7 +15,12 @@ import { Timer, MapPin, CurrencyDollar } from 'phosphor-react'
 
 import { useLocation, Navigate } from 'react-router-dom'
 
+import { OrderType } from './checkout'
 import Deliver from '../assets/img/deliver-illustration.svg'
+
+type OrderState = {
+  order: OrderType
+}
 
 export function SucceedOrder() {
   const theme = useTheme()
@@ -25,7 +30,7 @@ export function SucceedOrder() {
     return <Navigate to="/" />
   }
 
-  const { order } = state
+  const { order } = state as OrderState
 
   return (
     <Container as="main" mb={12} pt={12} w="1100px" maxW="100vw">

@@ -62,6 +62,7 @@ export function Header() {
 
         <Box position="relative">
           <IconButton
+            aria-label="A button with a icon of the shape of market car, used to go to checkout page"
             bg={theme.colors.yellow.light}
             color={theme.colors.yellow.dark}
             ml={4}

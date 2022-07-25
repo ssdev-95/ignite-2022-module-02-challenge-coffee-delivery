@@ -64,7 +64,7 @@ export function CartProvider({ children }: ProviderProps) {
       return increaseCoffeeQuantityByOne(id)
     }
 
-    const coffeePrice = coffees.find((coffee) => coffee.id === id).price
+    const coffeePrice = coffees.find((coffee) => coffee.id === id)?.price
 
     setCart((prev) => [
       ...prev,
@@ -72,8 +72,8 @@ export function CartProvider({ children }: ProviderProps) {
         id: `item-${id}-${Date.now()}`,
         quantity: 1,
         coffeeId: id,
-        unityPrice: coffeePrice,
-        totalPrice: coffeePrice,
+        unityPrice: coffeePrice ?? 0,
+        totalPrice: coffeePrice ?? 0,
       },
     ])
   }

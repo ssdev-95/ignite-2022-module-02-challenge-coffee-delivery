@@ -56,7 +56,8 @@ export function NotFound() {
                 <Text as="strong" fontSize="md" color={theme.colors.base.text}>
                   Contact us at &nbsp;
                   <Link
-                    to="https://google.com.br"
+                    as="a"
+                    href="https://google.com.br"
                     target="_blank"
                     rel="external"
                   >

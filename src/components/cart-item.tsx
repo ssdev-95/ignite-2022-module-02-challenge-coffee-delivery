@@ -36,24 +36,24 @@ export function CartItem({ item }: CartItemProps) {
   }
 
   function handleIncreaseQuantity() {
-    increaseCoffeeQuantityByOne(item.coffeeId)
+    increaseCoffeeQuantityByOne(item?.coffeeId)
   }
 
   function handleDecreaseQuantity() {
-    decreaseCoffeeQuantityByOne(item.coffeeId)
+    decreaseCoffeeQuantityByOne(item?.coffeeId)
   }
 
   return (
     <>
       <HStack w="full" mb={4}>
-        <Image src={coffee.image} alt="coffee boladaum" />
+        <Image src={coffee?.image} alt="coffee boladaum" />
 
         <VStack flex={1} w="full" alignItems="flex-start">
           <HStack w="full" justifyContent="space-between">
-            <Text>{coffee.name}</Text>
+            <Text>{coffee?.name}</Text>
             <Text as="strong">
               $&nbsp;
-              {item.unityPrice}
+              {item?.unityPrice}
             </Text>
           </HStack>
 
@@ -80,7 +80,7 @@ export function CartItem({ item }: CartItemProps) {
                   _hover={{
                     color: theme.colors.purple.medium,
                   }}
-                  disabled={item.quantity === 1}
+                  disabled={item?.quantity === 1}
                   onClick={handleDecreaseQuantity}
                 >
                   <Minus size={8} />
@@ -92,7 +92,7 @@ export function CartItem({ item }: CartItemProps) {
                   textAlign="center"
                   color={theme.colors.base.text}
                 >
-                  {item.quantity}
+                  {item?.quantity}
                 </Text>
 
                 <Button
@@ -110,7 +110,7 @@ export function CartItem({ item }: CartItemProps) {
                   _hover={{
                     color: theme.colors.purple.medium,
                   }}
-                  disabled={item.quantity === 5}
+                  disabled={item?.quantity === 5}
                   onClick={handleIncreaseQuantity}
                 >
                   <Plus size={8} />

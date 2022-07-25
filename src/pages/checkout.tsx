@@ -33,10 +33,11 @@ import { useGeolocation, Address } from '../hooks/useGeolocation'
 
 type PaymentTypes = 'credit' | 'debit' | 'cash' | 'pix'
 
-type OrderType = {
+export type OrderType = {
   address: Address & { complement?: string }
   items: ICartItem[]
   total: number
+  paymentType: PaymentTypes
 }
 
 export function Checkout() {
@@ -59,11 +60,11 @@ export function Checkout() {
 
   const theme = useTheme()
 
-  function togglePaymentType(type: PatmentTypes) {
+  function togglePaymentType(type: PaymentTypes) {
     setSelectedPaymentType(type)
   }
 
-  function handleInputTyping(evnt: ChangeEvent) {
+  function handleInputTyping(evnt: ChangeEvent<HTMLInputElement>) {
     const { name, value } = evnt.target
 
     const order = {
@@ -86,7 +87,7 @@ export function Checkout() {
       return
     }
 
-    const order = {
+    const order: OrderType = {
       ...newOrder,
       items: cart,
       paymentType: selectedPaymentType,
@@ -103,7 +104,7 @@ export function Checkout() {
     <Container as="main" w={1100} maxW="100vw" pb={10}>
       <form onSubmit={handleSendOrder}>
         <Flex gap={8} direction={{ base: 'column', md: 'row' }}>
-          <VStack space={8}>
+          <VStack spacing={8}>
             <Text
               as="strong"
               alignSelf="flex-start"
@@ -200,7 +201,7 @@ export function Checkout() {
 
                 <GridItem area="city">
                   <Input
-                    name="citt"
+                    name="city"
                     placeholder="City"
                     onChange={handleInputTyping}
                     defaultValue={address.city}
