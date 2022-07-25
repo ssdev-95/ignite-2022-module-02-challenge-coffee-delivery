@@ -27,4 +27,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   </React.StrictMode>
 )
 
-eruda.init()
+if (import.meta.env.DEV) {
+  eruda.init()
+}
